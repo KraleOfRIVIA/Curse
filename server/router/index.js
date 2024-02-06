@@ -1,8 +1,9 @@
 const Router = require('express').Router
 const userController = require('../controllers/UserController')
+const GameController = require('../controllers/GameController')
 const router = new Router()
 const {body} = require('express-validator')
-const authMiddleware = require('../middlewares/authMiddleware')
+const authMiddleware = require('../middlewares/AuthMiddleware')
 
 router.post('/register',
     body('email').isEmail(),
@@ -12,5 +13,7 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
 router.get('/users',authMiddleware ,userController.GetUsers);
+router.get('/games/:title', GameController.GetGameByTitle);
+router.get('/games', GameController.GetGames);
 
 module.exports = router

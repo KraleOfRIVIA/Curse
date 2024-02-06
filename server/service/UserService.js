@@ -1,8 +1,8 @@
 const uuid = require('uuid');
-const UserModel = require('../models/user');
+const UserModel = require('../models/UserModel');
 const bcrypt = require('bcrypt')
 const tokenService = require('./TokenService');
-const UserDto = require('../dtos/userDto');
+const UserDto = require('../dtos/UserDto');
 const ApiError = require('../exception/ApiError');
 
 // @ts-ignore
