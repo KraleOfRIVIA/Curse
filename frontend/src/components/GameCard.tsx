@@ -1,5 +1,7 @@
 import React from 'react';
-import {Card, CardMedia, CardContent, Typography, CardActions, Button} from '@mui/material';
+import { Card, CardMedia, CardContent, Typography, CardActions, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+import UserService from "../service/UserService.ts";
 
 interface GameCardProps {
     image: string | undefined;
@@ -9,11 +11,12 @@ interface GameCardProps {
 }
 
 const GameCard: React.FC<GameCardProps> = ({ image, title, genre, year }) => {
+    const handleAddGame = () => {
+        UserService.AddGameToUser(title)
+    };
 
     return (
-        <Card sx={{ maxWidth: 250,
-                    boxShadow: (theme) => `${theme.palette.primary.main} 5px 0px 15px 0px`,
-        }}>
+        <Card sx={{ maxWidth: 250, boxShadow: (theme) => `${theme.palette.primary.main} 5px 0px 15px 0px` }}>
             <CardMedia
                 component="img"
                 alt={title}
@@ -22,7 +25,7 @@ const GameCard: React.FC<GameCardProps> = ({ image, title, genre, year }) => {
                 title={title}
             />
             <CardContent>
-                <Typography variant='h3'>
+                <Typography variant="h3">
                     {title}
                 </Typography>
                 <Typography>
@@ -33,11 +36,15 @@ const GameCard: React.FC<GameCardProps> = ({ image, title, genre, year }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button color="secondary" variant="contained" size="small">Add</Button>
-                <Button color="secondary" variant="contained" size="small">Learn More</Button>
+                <Button color="secondary" variant="contained" size="small" onClick={handleAddGame}>
+                    Add
+                </Button>
+                <Button component={Link} to={`/games/${title}`} color="secondary" variant="contained" size="small">
+                    Learn More
+                </Button>
             </CardActions>
         </Card>
     );
-}
+};
 
 export default GameCard;

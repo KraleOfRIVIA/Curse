@@ -1,23 +1,35 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Box, Typography} from "@mui/material";
+import {useParams} from "react-router-dom";
+import GameService from "../service/GameService.ts";
+import {IGame} from "../models/IGame.ts";
 
 
 
-interface IGamePageProps {
-    image: string | undefined;
-    title: string | undefined;
-    description: string | undefined;
-    genre: string | undefined;
-    year: string | undefined;
-}
-const GamePage: FC<IGamePageProps> = ({ image, title, description, genre, year }) => {
+const GamePage: FC = () => {
+    const [game, setGame] = useState<IGame>()
+
+    const {title} = useParams<{title: string}>()
+    async function getGame(title: string | undefined) {
+        try {
+            const response = await GameService.getGameByTitle(title);
+            setGame(response.data);
+        } catch (e) {
+            // @ts-ignore
+            console.log(e)
+        }
+
+    }
+    useEffect(() => {
+        getGame(title);
+    }, []);
     return (
         <Box>
-            <img src={image} alt={title} />
-            <Typography variant="h1">{title}</Typography>
-            <Typography variant="h3">{description}</Typography>
-            <Typography variant="h3">{genre}</Typography>
-            <Typography variant="h3">{year}</Typography>
+            <img src={game?.image}/>
+            <Typography variant="h1">{game?.title}</Typography>
+            <Typography variant="h3">{game?.genre}</Typography>
+            <Typography variant="h3">{game?.year}</Typography>
+            <Typography variant="h3">{game?.description}</Typography>
         </Box>
     )
 }

@@ -13,7 +13,10 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
 router.get('/users',authMiddleware ,userController.GetUsers);
-router.get('/games/:title', GameController.GetGameByTitle);
+router.get('/games/:title', authMiddleware, GameController.GetGameByTitle);
 router.get('/games', GameController.GetGames);
-
+router.post('/createGame', authMiddleware, GameController.CreateGame);
+router.post('/addGameToUser', authMiddleware, userController.AddGameToUser);
+router.post('/removeGameFromUser', authMiddleware, userController.RemoveGameFromUser);
+router.get('/getUserGames', userController.GetGamesFromUser);
 module.exports = router

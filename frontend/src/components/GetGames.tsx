@@ -21,6 +21,7 @@ const GetGames:FC = () => {
     }, []);
     return (
             <Box sx={{
+                my: 2,
                 display:'flex',
                 flexDirection:{xs:'column',sm:'row'},
                 justifyContent:'center',

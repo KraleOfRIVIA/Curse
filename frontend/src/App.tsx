@@ -1,32 +1,26 @@
 import LoginForm from "./components/LoginForm.tsx";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import {Context} from "./Main.tsx";
 import {observer} from "mobx-react-lite";
-import {IUser} from "./models/IUser.ts";
-import UserService from "./service/UserService.ts";
+
+import NavBar from "./components/NavBar.tsx";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Box, FormControl, FormLabel, SvgIcon} from "@mui/material";
 import GetGames from "./components/GetGames.tsx";
-import {Box, Button, Container, Typography} from "@mui/material";
+import SettingsPage from "./components/SettingsPage.tsx";
+import GamePage from "./components/GamePage.tsx";
+import LoginIcon from "@mui/icons-material/Login";
+import MyGamesPage from "./components/MyGamesPage.tsx";
+
 
 
 function App() {
     const {store} = useContext(Context)
-    const [users, setUsers] = useState<IUser[]>([])
     useEffect(() => {
         if (localStorage.getItem('token')) {
             store.checkAuth()
         }
     }, [])
-
-    async function getUsers() {
-        try {
-            const response = await UserService.getUsers();
-            setUsers(response.data);
-        } catch (e) {
-            // @ts-ignore
-            console.log(e)
-        }
-    }
-
 
     if (store.isLoading) {
         return <h1>Loading...</h1>
@@ -36,19 +30,30 @@ function App() {
     }
   return (
     <>
-        <Container>
-            <Typography variant="h1" sx={{my:4,textAlign: "center", color :'primary.main'}}>{store.isAuth ? `User: ${store.user.email}` : 'Not authorized'}</Typography>
-            <Button onClick={() => store.logout()}>Logout</Button>
-            <Box>
-                <Button onClick={getUsers}>Get users</Button>
-            </Box>
-            {users.map(user =>
-                <Box key={user.email}>{user.email}</Box>
-            )}
-        </Container>
         <Box>
-            <GetGames />
+            <Box sx={{display:'flex', justifyContent:'center'}}>
+            <SvgIcon component={LoginIcon}/>
+            </Box>
+                <Box sx={{mx:'auto',display:'flex', justifyContent:'center',maxWidth: 250, borderRadius:"16px",}}>
+                    <FormControl sx={{alignItems:'center'}}>
+
+                        <FormLabel>Welcome</FormLabel>
+
+                    </FormControl>
+                </Box>
         </Box>
+        <BrowserRouter>
+            <NavBar />
+            <Box sx={{ width: '100%' }}>
+                <Routes>
+                    <Route element={<GetGames/>} path="/games" />
+                    <Route element={<SettingsPage/>} path="/Settings" />
+                    <Route path="/games/:title" element={<GamePage/>}/>
+                    <Route path="/" element={<Box sx={{display:'flex', justifyContent:'center'}}><SvgIcon component={LoginIcon}/></Box>}/>
+                    <Route path="/MyGames" element={<MyGamesPage/>}/>
+                </Routes>
+            </Box>
+        </BrowserRouter>
     </>
   )
 }

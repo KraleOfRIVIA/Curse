@@ -55,5 +55,33 @@ class UserController {
             next(e)
         }
     }
+    async AddGameToUser(req, res, next) {
+        try {
+            const {userId, game} = req.body
+            const user = await UserService.AddGameToUser(userId, game);
+            return res.json(user);
+        } catch (e) {
+            next(e)
+        }
+    }
+    async GetGamesFromUser(req, res, next) {
+        try {
+            const {userId} = req.body
+            const games = await UserService.GetGamesFromUser(userId);
+            return res.json(games);
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+    async RemoveGameFromUser(req, res, next) {
+        try {
+            const {userId, game} = req.body
+            const user = await UserService.RemoveGameFromUser(userId, game);
+            return res.json(user);
+        } catch (e) {
+            next(e)
+        }
+    }
 }
 module.exports = new UserController()

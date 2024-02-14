@@ -8,7 +8,7 @@ const store = new Store()
 const theme = createTheme({
     palette: {
         primary: {
-            main:"#013e87"
+            main:"#041a38"
         },
         secondary: {
             main: "#2e74c9"
