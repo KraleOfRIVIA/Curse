@@ -24,18 +24,17 @@ function CenteredTabs() {
         }
     };
     return (
-        <Toolbar sx={{ width: '100%', bgcolor: '#cfe8fc' }}>
+        <Toolbar sx={{ width: '100%',backgroundColor: "secondary.main"}}>
             <Tabs value={value} onChange={handleChange} centered>
                 <Tab label="Games"  to="/Games" component={Link} />
-                <Tab label="Settings" to="/Settings" component={Link} />
                 <Tab label="My games" to="/MyGames" component={Link}/>
             </Tabs>
             <FormControl sx={{width: '80%'}}>
                 <InputLabel htmlFor="component-search"><SvgIcon fontVariant = "small" component={SearchIcon} /></InputLabel>
                 <Input id="component-search" onChange={event => setSearch(event.target.value)} value={search} onKeyDown={handleKeyDown}/>
             </FormControl>
-            <Box sx={{alignItems: "flex-end", float: "left"}}>
-                <Typography variant="h3" sx={{textAlign: "left", color :'primary.main'}}><SvgIcon fontVariant = "small" component={AccountCircleIcon}/> {store.isAuth ? `${store.user.email}` : 'Not authorized'}</Typography>
+            <Box onClick={() => <Box>store.logout()</Box>}  sx={{alignItems: "flex-end", float: "left"}}>
+                <Typography variant="h3" sx={{textAlign: "left", color :'primary.main'}}><SvgIcon  fontVariant = "small" component={AccountCircleIcon}/>{store.user.email}</Typography>
             </Box>
         </Toolbar>
     );

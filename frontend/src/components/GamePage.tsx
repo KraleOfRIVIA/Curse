@@ -27,9 +27,9 @@ const GamePage: FC = () => {
         <Box>
             <img src={game?.image}/>
             <Typography variant="h1">{game?.title}</Typography>
-            <Typography variant="h3">{game?.genre}</Typography>
-            <Typography variant="h3">{game?.year}</Typography>
-            <Typography variant="h3">{game?.description}</Typography>
+            <Typography >{game?.genre}</Typography>
+            <Typography>{game?.year}</Typography>
+            <Typography>{game?.description}</Typography>
         </Box>
     )
 }

@@ -24,8 +24,8 @@ class GameController {
     }
     async CreateGame(req, res, next) {
         try {
-            const {title, image, description, genre, year} = req.body
-            const game = await GameService.CreateGame(title, image, description, genre, year);
+            const {image, title, description, genre, year} = req.body
+            const game = await GameService.CreateGame(image, title, description, genre, year);
             res.json(game);
         } catch (e) {
             next(e);

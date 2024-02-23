@@ -1,6 +1,7 @@
 const Router = require('express').Router
 const userController = require('../controllers/UserController')
 const GameController = require('../controllers/GameController')
+const ReviewController = require('../controllers/ReviewController')
 const router = new Router()
 const {body} = require('express-validator')
 const authMiddleware = require('../middlewares/AuthMiddleware')
@@ -18,5 +19,7 @@ router.get('/games', GameController.GetGames);
 router.post('/createGame', authMiddleware, GameController.CreateGame);
 router.post('/addGameToUser', authMiddleware, userController.AddGameToUser);
 router.post('/removeGameFromUser', authMiddleware, userController.RemoveGameFromUser);
-router.get('/getUserGames', userController.GetGamesFromUser);
+router.post('/getUserGames', userController.GetGamesFromUser);
+router.post('/createReview', authMiddleware, ReviewController.CreateReview);
+router.post('/getReviews/:title', ReviewController.GetReviewsForGame);
 module.exports = router

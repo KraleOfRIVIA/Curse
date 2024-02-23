@@ -57,8 +57,8 @@ class UserController {
     }
     async AddGameToUser(req, res, next) {
         try {
-            const {userId, game} = req.body
-            const user = await UserService.AddGameToUser(userId, game);
+            const {email, game} = req.body
+            const user = await UserService.AddGameToUser(email, game);
             return res.json(user);
         } catch (e) {
             next(e)
@@ -66,8 +66,8 @@ class UserController {
     }
     async GetGamesFromUser(req, res, next) {
         try {
-            const {userId} = req.body
-            const games = await UserService.GetGamesFromUser(userId);
+            const {email} = req.body
+            const games = await UserService.GetGamesFromUser(email);
             return res.json(games);
         }
         catch (e) {
@@ -76,8 +76,8 @@ class UserController {
     }
     async RemoveGameFromUser(req, res, next) {
         try {
-            const {userId, game} = req.body
-            const user = await UserService.RemoveGameFromUser(userId, game);
+            const {email, game} = req.body
+            const user = await UserService.RemoveGameFromUser(email, game);
             return res.json(user);
         } catch (e) {
             next(e)

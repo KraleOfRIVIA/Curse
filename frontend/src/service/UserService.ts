@@ -9,10 +9,13 @@ export default class UserService {
         return $api.get<IUser[]>('/users')
     }
 
-    static async GetGamesFromUser(): Promise<AxiosResponse<IGame[]>> {
-        return $api.get<IGame[]>('/getUserGames')
+    static async GetGamesFromUser(email: string): Promise<AxiosResponse<IGame[]>> {
+        return $api.post<IGame[]>('/getUserGames', {email});
     }
-    static async AddGameToUser(game: string | undefined): Promise<AxiosResponse<IUser>> {
-        return $api.post<IUser>('/addGameToUser', {game})
+    static async AddGameToUser(email: string | undefined,game: string | undefined): Promise<AxiosResponse<IUser>> {
+        return $api.post<IUser>('/addGameToUser', {email,game})
+    }
+    static async RemoveGameFromUser(email: string | undefined, game: string | undefined): Promise<AxiosResponse<IUser>> {
+        return $api.post<IUser>('/removeGameFromUser', {email,game})
     }
 }

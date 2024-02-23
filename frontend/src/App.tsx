@@ -5,13 +5,14 @@ import {observer} from "mobx-react-lite";
 
 import NavBar from "./components/NavBar.tsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Box, FormControl, FormLabel, SvgIcon} from "@mui/material";
+import {Box, SvgIcon} from "@mui/material";
 import GetGames from "./components/GetGames.tsx";
 import SettingsPage from "./components/SettingsPage.tsx";
 import GamePage from "./components/GamePage.tsx";
-import LoginIcon from "@mui/icons-material/Login";
 import MyGamesPage from "./components/MyGamesPage.tsx";
-
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import {MainPage} from "./components/MainPage.tsx";
+import {CreateGamePage} from "./components/CreateGamePage.tsx";
 
 
 function App() {
@@ -23,38 +24,25 @@ function App() {
     }, [])
 
     if (store.isLoading) {
-        return <h1>Loading...</h1>
+        return <SvgIcon sx={{ width: 100, height: 100, mx: 'auto',my: '300px', display: 'flex', justifyContent: 'center' }} component={HourglassBottomIcon} />
     }
     if(!store.isAuth) {
         return <LoginForm />
     }
   return (
-    <>
-        <Box>
-            <Box sx={{display:'flex', justifyContent:'center'}}>
-            <SvgIcon component={LoginIcon}/>
-            </Box>
-                <Box sx={{mx:'auto',display:'flex', justifyContent:'center',maxWidth: 250, borderRadius:"16px",}}>
-                    <FormControl sx={{alignItems:'center'}}>
-
-                        <FormLabel>Welcome</FormLabel>
-
-                    </FormControl>
-                </Box>
-        </Box>
         <BrowserRouter>
-            <NavBar />
-            <Box sx={{ width: '100%' }}>
-                <Routes>
-                    <Route element={<GetGames/>} path="/games" />
-                    <Route element={<SettingsPage/>} path="/Settings" />
-                    <Route path="/games/:title" element={<GamePage/>}/>
-                    <Route path="/" element={<Box sx={{display:'flex', justifyContent:'center'}}><SvgIcon component={LoginIcon}/></Box>}/>
-                    <Route path="/MyGames" element={<MyGamesPage/>}/>
-                </Routes>
-            </Box>
+                <NavBar />
+                    <Box>
+                        <Routes>
+                            <Route path="/games" element={<GetGames/>} />
+                            <Route path="/Settings" element={<SettingsPage/>} />
+                            <Route path="/games/:title" element={<GamePage/>}/>
+                            <Route path="/" element={<MainPage/>}/>
+                            <Route path="/MyGames" element={<MyGamesPage/>}/>
+                            <Route path="/create" element={<CreateGamePage/>}/>
+                        </Routes>
+                    </Box>
         </BrowserRouter>
-    </>
   )
 }
 export default observer(App);

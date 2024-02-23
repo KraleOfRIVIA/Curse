@@ -5,8 +5,10 @@ import {observer} from "mobx-react-lite";
 import {IGame} from "../models/IGame.ts";
 import GameService from "../service/GameService.ts";
 const GetGames:FC = () => {
-    const [game, setGame] = useState<IGame[]>()
-
+    const [game, setGame] = useState<IGame[]>([])
+    const handleRemoveGame = (title: string | undefined) => {
+        setGame(game.filter((game) => game.title !== title)); // Update UI immediately
+    };
     async function getGames() {
         try {
             const response = await GameService.getGames();
@@ -29,7 +31,7 @@ const GetGames:FC = () => {
             }}>
                 {game?.map(game =>
                     <Box key={game.title}>
-                        <GameCard image={game.image} title={game.title} genre={game.genre} year={game.year}/>
+                        <GameCard image={game.image} title={game.title} genre={game.genre} year={game.year} add={true} onRemoveGame={ handleRemoveGame}/>
                     </Box>
                 )}
             </Box>

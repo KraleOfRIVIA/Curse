@@ -12,6 +12,9 @@ const theme = createTheme({
         },
         secondary: {
             main: "#2e74c9"
+        },
+        background:{
+            default: "#000000",
         }
     },
     typography: {
@@ -27,7 +30,26 @@ const theme = createTheme({
             fontSize:"1.5rem",
             fontWeight:"600",
         },
+    },
+    components: {
+        MuiLink: {
+            defaultProps: {
+                underline: 'none',
+            },
+        },
+        MuiButton: {
+            defaultProps: {
+                variant: 'contained',
+                size: 'large',
+            },
+            styleOverrides: {
+                root: {
+                    textTransform: 'none',
+                },
+            },
+        },
     }
+
 });
 interface State {
     store: Store
@@ -39,7 +61,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <Context.Provider value={{store}}>
     <React.StrictMode>
         <ThemeProvider theme={theme}>
-            <App />
+            <App/>
         </ThemeProvider>
     </React.StrictMode>
   </Context.Provider>

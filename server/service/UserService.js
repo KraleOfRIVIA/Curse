@@ -69,7 +69,7 @@ class UserService {
         return users
     }
     async AddGameToUser(email, title) {
-        const user = await UserModel.findOne(email);
+        const user = await UserModel.findOne({email : email});
         if(!user)
         {
             throw ApiError.BadRequest('User not found')
@@ -87,7 +87,7 @@ class UserService {
         return user
     }
     async RemoveGameFromUser(email, title) {
-        const user = await UserModel.findOne(email);
+        const user = await UserModel.findOne({email : email});
         if(!user)
         {
             throw ApiError.BadRequest('User not found')
@@ -102,7 +102,7 @@ class UserService {
         return user
     }
     async GetGamesFromUser(email) {
-        const user = await UserModel.findOne(email);
+        const user = await UserModel.findOne({email : email});
         if(!user)
         {
             throw ApiError.BadRequest('User not found')
