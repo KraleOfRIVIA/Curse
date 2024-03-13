@@ -20,6 +20,6 @@ router.post('/createGame', authMiddleware, GameController.CreateGame);
 router.post('/addGameToUser', authMiddleware, userController.AddGameToUser);
 router.post('/removeGameFromUser', authMiddleware, userController.RemoveGameFromUser);
 router.post('/getUserGames', userController.GetGamesFromUser);
-router.post('/createReview', authMiddleware, ReviewController.CreateReview);
+router.post('/createReview', ReviewController.CreateReview);
 router.post('/getReviews/:title', ReviewController.GetReviewsForGame);
 module.exports = router

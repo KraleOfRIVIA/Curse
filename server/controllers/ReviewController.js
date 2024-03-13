@@ -4,8 +4,11 @@ class ReviewController {
 
     async CreateReview(req, res, next) {
         try {
-            const {title_game, text_review, autor, grade} = req.body
-            const review = await ReviewService.CreateReview(title_game, text_review, autor, grade)
+            const {title_game, text_review, author, grade} = req.body
+            if (grade > 5) {
+                throw new Error('Grade must be between 0 and 5')
+            }
+            const review = await ReviewService.CreateReview(title_game, text_review, author, grade)
             res.json(review)
         } catch (e) {
             next(e)

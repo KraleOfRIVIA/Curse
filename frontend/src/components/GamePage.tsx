@@ -1,14 +1,14 @@
 import {FC, useEffect, useState} from 'react';
-import {Box, Typography} from "@mui/material";
-import {useParams} from "react-router-dom";
+import {Box, Button, Typography} from "@mui/material";
+import {useNavigate, useParams} from "react-router-dom";
 import GameService from "../service/GameService.ts";
 import {IGame} from "../models/IGame.ts";
-
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 
 const GamePage: FC = () => {
     const [game, setGame] = useState<IGame>()
-
+    const navigate = useNavigate();
     const {title} = useParams<{title: string}>()
     async function getGame(title: string | undefined) {
         try {
@@ -25,11 +25,18 @@ const GamePage: FC = () => {
     }, []);
     return (
         <Box>
-            <img src={game?.image}/>
-            <Typography variant="h1">{game?.title}</Typography>
-            <Typography >{game?.genre}</Typography>
-            <Typography>{game?.year}</Typography>
-            <Typography>{game?.description}</Typography>
+            <Box>
+                <img src={game?.image}/>
+                <Typography variant="h1">{game?.title}</Typography>
+                <Typography >{game?.genre}</Typography>
+                <Typography>{game?.year}</Typography>
+                <Typography>{game?.description}</Typography>
+            </Box>
+            <Box>
+                <Typography variant="h3">You want to write a review ?</Typography>
+                <Button onClick={ () => navigate(`/CreateReview/${title}`)}><RateReviewIcon/></Button>
+
+            </Box>
         </Box>
     )
 }

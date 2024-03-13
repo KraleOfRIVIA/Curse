@@ -13,6 +13,7 @@ import MyGamesPage from "./components/MyGamesPage.tsx";
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import {MainPage} from "./components/MainPage.tsx";
 import {CreateGamePage} from "./components/CreateGamePage.tsx";
+import ReviewPage from "./components/ReviewPage.tsx";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
                             <Route path="/" element={<MainPage/>}/>
                             <Route path="/MyGames" element={<MyGamesPage/>}/>
                             <Route path="/create" element={<CreateGamePage/>}/>
+                            <Route path="/createReview/:title_game" element={<ReviewPage/>}/>
                         </Routes>
                     </Box>
         </BrowserRouter>
