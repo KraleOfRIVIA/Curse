@@ -21,5 +21,6 @@ router.post('/addGameToUser', authMiddleware, userController.AddGameToUser);
 router.post('/removeGameFromUser', authMiddleware, userController.RemoveGameFromUser);
 router.post('/getUserGames', userController.GetGamesFromUser);
 router.post('/createReview', ReviewController.CreateReview);
-router.post('/getReviews/:title', ReviewController.GetReviewsForGame);
+router.get('/getReviews/:title_game', ReviewController.GetReviewsForGame);
+router.post('/deleteReview', ReviewController.RemoveReview);
 module.exports = router
