@@ -1,5 +1,5 @@
 import  { FC, useEffect, useState, useContext } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, Divider } from '@mui/material'; // Добавлен Divider
 import { useNavigate, useParams } from 'react-router-dom';
 import GameService from '../service/GameService';
 import ReviewService from '../service/ReviewService';
@@ -49,7 +49,7 @@ const GamePage: FC = () => {
     };
 
     return (
-        <Box sx={{ textAlign: 'center' }}>
+        <Box sx={{  flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
             <Box sx={{ margin: 'auto', maxWidth: '600px' }}>
                 <img src={game?.image} alt={game?.title} />
                 <Typography variant="h1">{game?.title}</Typography>
@@ -65,12 +65,14 @@ const GamePage: FC = () => {
             </Box>
             <Box>
                 <Typography variant="h3">Reviews:</Typography>
-                {reviews.map(review => (
+                <Divider /> {/* Добавлена линия разделения */}
+                {reviews.map((review, index) => (
                     <Box
                         key={review.id}
                         sx={{
+                            marginLeft: '600px',
+                            marginRight: '600px',
                             marginBottom: '20px',
-                            padding: '10px',
                             backgroundColor: '#f9f9f9',
                             borderRadius: '8px',
                             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
@@ -94,6 +96,7 @@ const GamePage: FC = () => {
                         <Typography variant="body2">
                             {review.text_review}
                         </Typography>
+                        {index !== reviews.length - 1 && <Divider />} {/* Добавлен отступ между отзывами */}
                         {store.user.email === review.author && (
                             <Button variant="outlined" onClick={() => handleDeleteReview(review.author)}>Delete Review</Button>
                         )}
