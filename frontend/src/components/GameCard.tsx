@@ -45,7 +45,7 @@ const GameCard: React.FC<GameCardProps> = ({ image, title, genre, year, add, onR
     };
 
     return (
-        <Card sx={{ height:280 , width: 280, boxShadow: (theme) => `${theme.palette.primary.main} 5px 0px 15px 0px` }}>
+        <Card sx={{ height:300 , width: 300, boxShadow: (theme) => `${theme.palette.primary.main} 5px 0px 15px 0px` }}>
             <CardMedia
                 component="img"
                 alt={title}

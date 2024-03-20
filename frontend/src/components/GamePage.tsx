@@ -49,8 +49,8 @@ const GamePage: FC = () => {
     };
 
     return (
-        <Box>
-            <Box>
+        <Box sx={{ textAlign: 'center' }}>
+            <Box sx={{ margin: 'auto', maxWidth: '600px' }}>
                 <img src={game?.image} alt={game?.title} />
                 <Typography variant="h1">{game?.title}</Typography>
                 <Typography>{game?.genre}</Typography>
