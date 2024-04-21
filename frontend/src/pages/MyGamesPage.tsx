@@ -1,5 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import GameCard from "./GameCard.tsx";
+import GameCard from "../components/GameCard.tsx";
 import {Box} from "@mui/material";
 import {observer} from "mobx-react-lite";
 import {IGame} from "../models/IGame.ts";
@@ -13,13 +13,8 @@ const MyGamesPage:FC = () => {
         setGame(game.filter((game) => game.title !== title)); // Update UI immediately
     };
     async function getMyGames() {
-        try {
             const response = await UserService.GetGamesFromUser(store.user.email)
             setGame(response.data)
-        } catch (e) {
-            // @ts-ignore
-            console.log(e)
-        }
     }
 
     useEffect(() => {

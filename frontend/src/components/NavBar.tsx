@@ -33,7 +33,7 @@ function CenteredTabs() {
                 <InputLabel htmlFor="component-search"><SvgIcon fontVariant = "small" component={SearchIcon} /></InputLabel>
                 <Input id="component-search" onChange={event => setSearch(event.target.value)} value={search} onKeyDown={handleKeyDown}/>
             </FormControl>
-            <Box onClick={() => <Box>store.logout()</Box>}  sx={{alignItems: "flex-end", float: "left"}}>
+            <Box onClick={() => navigate("/settings")}  sx={{alignItems: "flex-end", float: "left"}}>
                 <Typography variant="h3" sx={{textAlign: "left", color :'primary.main'}}><SvgIcon  fontVariant = "small" component={AccountCircleIcon}/>{store.user.email}</Typography>
             </Box>
         </Toolbar>

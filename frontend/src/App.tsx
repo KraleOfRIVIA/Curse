@@ -6,14 +6,13 @@ import {observer} from "mobx-react-lite";
 import NavBar from "./components/NavBar.tsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Box, SvgIcon} from "@mui/material";
-import GetGames from "./components/GetGames.tsx";
-import SettingsPage from "./components/SettingsPage.tsx";
-import GamePage from "./components/GamePage.tsx";
-import MyGamesPage from "./components/MyGamesPage.tsx";
+import GetGames from "./pages/GetGames.tsx";
+import SettingsPage from "./pages/SettingsPage.tsx";
+import GamePage from "./pages/GamePage.tsx";
+import MyGamesPage from "./pages/MyGamesPage.tsx";
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
-import {MainPage} from "./components/MainPage.tsx";
-import {CreateGamePage} from "./components/CreateGamePage.tsx";
-import ReviewPage from "./components/ReviewPage.tsx";
+import {MainPage} from "./pages/MainPage.tsx";
+import ReviewPage from "./pages/ReviewPage.tsx";
 
 
 function App() {
@@ -40,7 +39,6 @@ function App() {
                             <Route path="/games/:title" element={<GamePage/>}/>
                             <Route path="/" element={<MainPage/>}/>
                             <Route path="/MyGames" element={<MyGamesPage/>}/>
-                            <Route path="/create" element={<CreateGamePage/>}/>
                             <Route path="/createReview/:title_game" element={<ReviewPage/>}/>
                         </Routes>
                     </Box>

@@ -24,57 +24,36 @@ export default class store {
 
 
     async login(email: string, password: string) {
-        try {
-            const response = await AuthService.login(email, password)
-            console.log(response)
-            localStorage.setItem('token', response.data.accessToken)
-            this.setAuth(true)
-            this.setUser(response.data.user)
-        } catch (e) {
-            // @ts-ignore
-            console.log(e.response?.data?.message)
-        }
+        const response = await AuthService.login(email, password)
+        console.log(response)
+        localStorage.setItem('token', response.data.accessToken)
+        this.setAuth(true)
+        this.setUser(response.data.user)
     }
     async registration(email: string, password: string) {
-        try {
-            const response = await AuthService.registration(email, password)
-            console.log(response)
-            localStorage.setItem('token', response.data.accessToken)
-            this.setAuth(true)
-            this.setUser(response.data.user)
-        } catch (e) {
-            // @ts-ignore
-            console.log(e.response?.data?.message)
-        }
+        const response = await AuthService.registration(email, password)
+        console.log(response)
+        localStorage.setItem('token', response.data.accessToken)
+        this.setAuth(true)
+        this.setUser(response.data.user)
     }
     async logout() {
-        try {
-            const response = await AuthService.logout()
-            console.log(response)
-            localStorage.removeItem('token')
-            this.setAuth(false)
-            this.setUser({} as IUser)
-        } catch (e) {
-            // @ts-ignore
-            console.log(e.response?.data?.message)
-        }
+        const response = await AuthService.logout()
+        console.log(response)
+        localStorage.removeItem('token')
+        this.setAuth(false)
+        this.setUser({} as IUser)
     }
     setIsLoading(bool: boolean) {
         this.isLoading = bool
     }
     async checkAuth() {
         this.setIsLoading(true)
-        try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true});
-            localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
-            this.setUser(response.data.user);
-        }
-        catch (e) {
-            // @ts-ignore
-            // console.log(e.response?.data?.message)
-        } finally {
-            this.setIsLoading(false)
-        }
+        const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true});
+        localStorage.setItem('token', response.data.accessToken);
+        this.setAuth(true);
+        this.setUser(response.data.user);
+
+        this.setIsLoading(false)
     }
 }

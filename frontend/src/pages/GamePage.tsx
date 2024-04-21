@@ -1,12 +1,12 @@
 import  { FC, useEffect, useState, useContext } from 'react';
 import { Box, Button, Typography, Divider } from '@mui/material'; // Добавлен Divider
 import { useNavigate, useParams } from 'react-router-dom';
-import GameService from '../service/GameService';
-import ReviewService from '../service/ReviewService';
-import { IGame } from '../models/IGame';
-import { IReview } from '../models/IReview';
+import GameService from '../service/GameService.ts';
+import ReviewService from '../service/ReviewService.ts';
+import { IGame } from '../models/IGame.ts';
+import { IReview } from '../models/IReview.ts';
 import RateReviewIcon from '@mui/icons-material/RateReview';
-import { Context } from '../Main';
+import { Context } from '../Main.tsx';
 import Rating from "@mui/material/Rating";
 
 const GamePage: FC = () => {

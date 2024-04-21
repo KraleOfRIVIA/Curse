@@ -4,7 +4,6 @@ import {IReview} from "../models/IReview.ts";
 
 export default class ReviewService {
 
-    //будущее дописать
     static async getReviewsForGame(title_game: string | undefined): Promise<AxiosResponse<IReview[]>> {
         return $api.get<IReview[]>('/getReviews/' + title_game)
     }

@@ -23,24 +23,21 @@ const GameCard: React.FC<GameCardProps> = ({ image, title, genre, year, add, onR
     const handleAddGame = async () => {
         try {
             await UserService.AddGameToUser(store.user.email,title);
-            // Success handling (if needed, e.g., update UI to reflect addition)
         } catch (error) {
             console.error("Error adding game:", error);
-            // Error handling (e.g., display an error message to the user)
 
         }
     };
 
     const handleRemoveGame = async () => {
-        setIsRemoving(true); // Set loading state to indicate in-progress removal
+        setIsRemoving(true);
         try {
             await UserService.RemoveGameFromUser(store.user.email,title);
-            onRemoveGame(title); // Trigger parent component to remove the card
+            onRemoveGame(title);
         } catch (error) {
             console.error("Error removing game:", error);
-            // Error handling (e.g., display an error message to the user)
         } finally {
-            setIsRemoving(false); // Reset loading state after removal attempt
+            setIsRemoving(false);
         }
     };
 
@@ -70,7 +67,7 @@ const GameCard: React.FC<GameCardProps> = ({ image, title, genre, year, add, onR
                     color= { add ? "secondary": "primary"}
                     size="small"
                     onClick={add ? handleAddGame : handleRemoveGame}
-                    disabled={isRemoving} // Disable button during removal
+                    disabled={isRemoving}
                 >
                     {isRemoving ? 'Removing...' : (add ? <AddIcon/> : <DeleteIcon />)}
                 </Button>

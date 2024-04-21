@@ -9,7 +9,4 @@ export default class GameService {
     static async getGames(): Promise<AxiosResponse<IGame[]>> {
         return $api.get<IGame[]>('/games/')
     }
-    static async createGame(game: IGame): Promise<AxiosResponse<IGame>> {
-        return $api.post<IGame>('/createGame', game)
-    }
 }

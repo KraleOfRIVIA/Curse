@@ -2,7 +2,7 @@ import {FC, useContext} from 'react';
 import {Button, Container, Typography} from "@mui/material";
 import {Context} from "../Main.tsx";
 import {observer} from "mobx-react-lite";
-import LoginForm from "./LoginForm.tsx";
+import LoginForm from "../components/LoginForm.tsx";
 
 
 

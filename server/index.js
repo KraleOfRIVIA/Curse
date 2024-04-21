@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-// @ts-ignore
 const router = require('./router/index');
 const mongoose = require('mongoose');
 const express = require('express');
